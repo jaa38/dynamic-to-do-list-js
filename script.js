@@ -1,49 +1,48 @@
-// Ensure the JavaScript runs after the HTML document has fully loaded
+// Setup Event Listener for Page Load
 document.addEventListener('DOMContentLoaded', () => {
-  // Select DOM elements
+
+  // Select DOM Elements
   const addButton = document.getElementById('add-task-btn');
   const taskInput = document.getElementById('task-input');
   const taskList = document.getElementById('task-list');
 
-  // Function to add a new task to the list
+  // Create the addTask function
   function addTask() {
-    // Retrieve and trim the input value
+    // Retrieve and trim input value
     const taskText = taskInput.value.trim();
 
-    // Check if the input is empty
+    // Check if input is empty
     if (taskText === '') {
       alert('Please enter a task.');
       return;
     }
 
-    // Create a new list item for the task
+    // Create a new list item
     const li = document.createElement('li');
     li.textContent = taskText;
 
-    // Create a remove button for the task
+    // Create remove button
     const removeButton = document.createElement('button');
     removeButton.textContent = 'Remove';
     removeButton.className = 'remove-btn';
 
-    // Assign click event to remove the task
+    // Assign onclick event to remove task
     removeButton.onclick = () => {
       taskList.removeChild(li);
     };
 
-    // Append the remove button to the list item
+    // Append button and list item
     li.appendChild(removeButton);
-
-    // Append the list item to the task list
     taskList.appendChild(li);
 
-    // Clear the input field after adding the task
+    // Clear input field
     taskInput.value = '';
   }
 
-  // Add event listener to the button to add tasks on click
+  // Attach event listener to button
   addButton.addEventListener('click', addTask);
 
-  // Add event listener to allow adding tasks by pressing the Enter key
+  // Attach keypress event listener for Enter key
   taskInput.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
       addTask();
